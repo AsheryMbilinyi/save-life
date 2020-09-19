@@ -12,7 +12,8 @@ const db =admin.firestore()
 
 exports.getEmergency= functions.firestore
     //specifying our emergency collection
-    .document('emergencies/EViT4RDxbCEToQTegUlb')
+    .document('emergencies/EViT4RDxbCEToQTegUlb') //please refer to our cloud firestore database for more info on emergencies attributes
+    //getting the entry emergency data
     .onCreate((snap, context) => {
       // Get an object representing the document
       // e.g. {'name': 'Marie', 'age': 66}
