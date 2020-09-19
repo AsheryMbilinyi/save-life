@@ -1,12 +1,4 @@
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
-
-// The Firebase Admin SDK to access Cloud Firestore.
-const admin = require('firebase-admin');
-admin.initializeApp();
-
-const db =admin.firestore()
-
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -15,6 +7,11 @@ const db =admin.firestore()
 //   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+const db =admin.firestore()
 
 
 // exports.writeToFirestore = functions.firestore
@@ -35,6 +32,8 @@ const db =admin.firestore()
 //     });
 
 
+
+//this function gets data from the document ->EViT4RDxbCEToQTegUlb in collection -> emergencies
 exports.getData = functions.https.onRequest((req, res) => {
     const docRef = db.collection('emergencies').doc('EViT4RDxbCEToQTegUlb');
     //console.log(docRef)
@@ -56,10 +55,10 @@ exports.getData = functions.https.onRequest((req, res) => {
 });
 
 
-
+//this function gets any new document (emergencyId) from emergencies collection and prints the location
+//of the new emergency for now
 exports.getEmergency= functions.firestore
-    //specifying our emergency collection
-    .document('emergencies/{emergencyId}') //we need a wildercard {emergencyId} to specify any new document created, not sure if this is right
+    .document('emergencies/{emergencyId}')
     .onCreate((snap, context) => {
         // Get an object representing the document
         const newValue = snap.data();
@@ -69,7 +68,7 @@ exports.getEmergency= functions.firestore
         //Getting the emergency type
         //const emergencyType = newValue.type;
 
-        document.write(location)
+        console.log(location)
         //
         // // Getting data from helpers collection to get the nearest helper
         //
@@ -92,9 +91,6 @@ exports.getEmergency= functions.firestore
 
         // perform desired operations ...
     });
-
-
-
 
 
 
