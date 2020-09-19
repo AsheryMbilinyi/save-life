@@ -16,7 +16,6 @@ exports.getEmergency= functions.firestore
     //getting the entry emergency data
     .onCreate((snap, context) => {
       // Get an object representing the document
-      // e.g. {'name': 'Marie', 'age': 66}
       const newValue = snap.data();
 
       // Getting the location of the emergency
